@@ -76,12 +76,11 @@
 // CreateArray(array);
 
 
+// -------------------------------------ДОП ЗАДАЧИ-------------------------------------------------
 
 
-
-// ДОП ЗАДАЧИ
 // Задача Array32. Дан массив размера N. Найти номер его первого локального минимума.
-//Ищем индекс первого локального минимума.
+//Ищем индекс локального минимума.
 
 // void CreateArray(int[] massiv)
 // {
@@ -93,30 +92,27 @@
 // int FindFirstLocalMin(int[] massiv)
 // {
 //     int localmin = (int)Math.Pow(33, 8); // на случай если локальных минимумов не будет, вернется значение "33 в 8 степени". (при необходимости работать с ним далее)
-//     int i = -1; //изначально задаем "-1" на случай если в массиве нет локальных минимумов
+//     bool check = false; //проверка на случай если в массиве нет локальных минимумов
 //     if (massiv.Length > 1) //проверка на счлучай, если массив будет состоять из одного значения
 //     {
 //         if (massiv[0] < massiv[1]) //проверка первого элемента массива
 //         {
 //             localmin = massiv[0];
-//             System.Console.WriteLine("Индекс первого локального минимума: " + 0);
+//             System.Console.WriteLine("индекс локального минимумма: " + 0);
 //             return localmin; // если первый элемент является локальным минимумом, то это ответ
-//         }
-//         // if (massiv.Length > 2) //проверка на счлучай, если массив будет состоять из одного значения
-
-//         for (i = 1; i <= massiv.Length - 1; i++) //проверяем все элементы массива, кроме последнего
+//         }    
+//         for (int i = 1; i <= massiv.Length - 1; i++) //проверяем все элементы массива, кроме первого
 //         {
 //             if (((massiv.Length > 2) && (i < massiv.Length - 1) && (massiv[i] < massiv[i + 1] && massiv[i] < massiv[i - 1])) //проверка с 1 по предпоследний эл-т
-//             || ((massiv.Length == 2) && (massiv[1] < massiv[0]))  // на случай если массив будет состоять из 2 элементов
 //             || (i == massiv.Length - 1 && massiv[massiv.Length - 1] < massiv[massiv.Length - 2])) // проверка последнего элемента
 //             {
 //                 localmin = massiv[i];
-//                 System.Console.WriteLine("Индекс первого локального минимума: " + i);
+//                 System.Console.WriteLine("индекс локального минимумма: " + i);
 //                 return localmin; //как только встерили первый локальный минимум возвращаем его методу
 //             }
 //         }
 //     }
-//     if (i == -1)
+//     if (check == false)
 //     {
 //         System.Console.WriteLine("Локальный минимум в массиве не найден");
 //     }
@@ -147,52 +143,43 @@
 // }
 
 
-
 // int FindFirstLocalMin(int[] massiv)
 // {
-//     int maxlocalmin = (int)Math.Pow(33, 8); // на случай если локальных минимумов не будет, вернется значение "33 в 8 степени". (при необходимости работать с ним далее);
-//     bool check = false; // для проверки, в случае если единственный локальный минимум - последний элемент
-//     for (int i = 0; i < massiv.Length - 1; i++) // задаем первый найденый локальный минимум как максимальный
-//     {
-//         if ((i == 0 && massiv[i] < massiv[i + 1]) || (i > 0 && (massiv[i] < massiv[i + 1] && massiv[i] < massiv[i - 1])))
-//         {
-//             maxlocalmin = massiv[i];
-//             check = true;
-//             break;
-//         }
-//     }
-//     for (int i = 0; i < massiv.Length - 1; i++) //проверяем все элементы массива, кроме последнего
-//     {
-//         if ((i == 0 && massiv[i] < massiv[i + 1]) || (i > 0 && (massiv[i] < massiv[i + 1] && massiv[i] < massiv[i - 1])))
-//         {
-//             System.Console.WriteLine("локальный минимум: " + massiv[i]);
-//             if (massiv[i] > maxlocalmin) //проверяем все найденные локальные минимумы с 1 элемента до предпоследнего
-//             {
-//                 maxlocalmin = massiv[i];
-//             }
-//         }
-//     }
+//     int maxlocalmin = (int)Math.Pow(33, 8); // на случай если локальных минимумов не будет, вернется значение "33 в 8 степени". (при необходимости работать с ним далее)
+//     bool check = false; // проверка наличия локальных минимумов
 //     if (massiv.Length > 1) //проверка на счлучай, если массив будет состоять из одного значения
 //     {
-//         if (massiv[massiv.Length - 1] < massiv[massiv.Length - 2]) //проверяем последний элемент массива
+//         if (massiv[0] < massiv[1]) //проверка первого элемента массива
 //         {
-//             System.Console.WriteLine("локальный минимум: " + massiv[massiv.Length - 1]);
-//             if (check == true && massiv[massiv.Length - 1] > maxlocalmin) //проверка на случай если до этого не было локальных минимумов
+//             maxlocalmin = massiv[0];
+//             check = true;
+//             System.Console.WriteLine("Локальный минимум: " + massiv[0]);
+//         }
+
+//         for (int i = 1; i <= massiv.Length - 1; i++) //проверяем все элементы массива, кроме первого
+//         {
+//             if (((massiv.Length > 2) && (i < massiv.Length - 1) && (massiv[i] < massiv[i + 1] && massiv[i] < massiv[i - 1])) //проверка с 1 по предпоследний эл-т
+//             || (i == massiv.Length - 1 && massiv[massiv.Length - 1] < massiv[massiv.Length - 2])) // проверка последнего элемента
 //             {
-//                 maxlocalmin = massiv[massiv.Length - 1];
-//             }
-//             else
-//             {
-//                 maxlocalmin = massiv[massiv.Length - 1];
+//                 System.Console.WriteLine("Локальный минимум: " + massiv[i]); // выводим найденный лок минимум на экран
+//                 if ((check == false)) // Если это первый локальный минимум, то он стал максимальным
+//                     maxlocalmin = massiv[i];
+//                 else
+//                 {
+//                     if (massiv[i] > maxlocalmin) // Если это не первый локальный минимум, то он будет максимальным только после проверки
+//                         maxlocalmin = massiv[i];
+//                 }
+//                 check = true;
 //             }
 //         }
 //     }
-//     if (maxlocalmin == (int)Math.Pow(33, 8))
+//     if (check == false)
 //     {
 //         System.Console.WriteLine("Локальный минимум в массиве не найден");
 //     }
 //     return maxlocalmin;
 // }
+
 
 // System.Console.WriteLine("Введите количество элементов массива:");
 // int Count = Convert.ToInt32(Console.ReadLine());
@@ -202,6 +189,7 @@
 // int MaxLocalmin = FindFirstLocalMin(array);
 // if (MaxLocalmin != (int)Math.Pow(33, 8))
 //     System.Console.WriteLine("Максимальный локальный минимум равен: " + MaxLocalmin);
+
 
 
 
@@ -272,29 +260,92 @@
 // {
 //     int i = 0;
 //     int index = 0;
-//     int summ = massiv[i] + massiv[i + 1];
+//     if (massiv.Length > 1)
+//     {
+//     int maxsumm = massiv[i] + massiv[i + 1]; // задаем максимальную сумму первых двух элементов
 //     for (i = 1; i < massiv.Length - 1; i++)
 //     {
-//         if (massiv[i] + massiv[i + 1] > summ)
+//         if (massiv[i] + massiv[i + 1] > maxsumm) // Если сумма следующих двух больше чем maxsumm, то запоминаем индекс первого из этих чисел
 //         {
 //             index = i;
 //         }
+//     }
+//     }
+//     else
+//     {
+//         System.Console.WriteLine("Массив содержит только один элемент");
 //     }
 //     return index;
 // }
 
 // void PrintElements(int ind, int[] arr)
 // {
-//     System.Console.WriteLine("Ответ: " + arr[ind] + "," + arr[ind + 1]);
+//     if ((arr.Length > 1))
+//     {
+//         System.Console.WriteLine("Ответ: " + arr[ind] + "," + arr[ind + 1]);
+//     }
 // }
 
-// Console.WriteLine("Введите количество элементов массива:");
-// int Count = Convert.ToInt32(Console.ReadLine());
-// int[] array = new int[Count];
-// CreateArray(array);
-// System.Console.WriteLine(string.Join(",", array));
-// PrintElements(FindIndexOfMaxSumm(array), array);
+    // Console.WriteLine("Введите количество элементов массива:");
+    // int Count = Convert.ToInt32(Console.ReadLine());
+    // int[] array = new int[Count];
+    // CreateArray(array);
+    // System.Console.WriteLine(string.Join(",", array));
+    // PrintElements(FindIndexOfMaxSumm(array), array);
 
 
 
-// Задача Array45. Дан массив размера N. Найти номера двух ближайших элементов из этого массива (тоесть элементов с наименьшим модулем разности) и вывести эти номера в порядке возрастания.
+    // Задача Array45. Дан массив размера N. Найти номера двух ближайших элементов из этого массива (тоесть элементов с наименьшим модулем разности) 
+    // и вывести эти номера в порядке возрастания.
+
+    // void CreateArray(int[] massiv)
+    // {
+    //     for (int i = 0; i < massiv.Length; i++)
+    //         massiv[i] = new Random().Next(0, 22);
+
+    // }
+
+    // int FindIndexOfNearestElements(int[] massiv) // примечание: найдутся последние два ближайших элемента, если их существует несколько.
+    // {
+    //     int i = 0;
+    //     int index = 0;
+    //     if (massiv.Length > 1)
+    //     {
+    //         int modulusOfDifference = Math.Abs(massiv[i] - massiv[i + 1]); // задаем наименьший модуль разности первых двух элементов
+    //         for (i = 1; i < massiv.Length - 1; i++)
+    //         {
+    //             if (Math.Abs(massiv[i] - massiv[i + 1]) < modulusOfDifference) // Если модуль разницы минимальный, то запоминаем индекс первого из этих чисел
+    //             {
+    //                 index = i;
+    //             }
+    //         }
+    //     }
+    //     else
+    //     {
+    //         System.Console.WriteLine("Массив содержит только один элемент");
+    //     }
+    //     return index;
+    // }
+
+    // void PrintElements(int ind, int[] arr)
+    // {
+    //     if ((arr.Length > 1))
+    //     {
+    //         if (arr[ind] <= arr[ind + 1])
+    //             System.Console.WriteLine("Ответ: " + arr[ind] + "," + arr[ind + 1]);
+    //         else
+    //         {
+    //             System.Console.WriteLine("Ответ: " + arr[ind + 1] + "," + arr[ind]);
+    //         }
+    //     }
+    // }
+
+    // Console.WriteLine("Введите количество элементов массива:");
+    // int Count = Convert.ToInt32(Console.ReadLine());
+    // int[] array = new int[Count];
+    // CreateArray(array);
+    // System.Console.WriteLine(string.Join(",", array));
+    // PrintElements(FindIndexOfNearestElements(array), array);
+
+
+
